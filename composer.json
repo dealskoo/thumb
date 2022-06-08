@@ -1,0 +1,62 @@
+{
+    "name": "dealskoo/thumb",
+    "description": "Dealskoo Thumb",
+    "homepage": "https://www.dealskoo.com",
+    "support": {
+        "issues": "https://github.com/dealskoo/thumb/issues",
+        "source": "https://github.com/dealskoo/thumb"
+    },
+    "keywords": [
+        "Laravel",
+        "Dealskoo Thumb",
+        "Dealskoo"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Dealskoo\\Thumb\\": "src/",
+            "Database\\Factories\\Dealskoo\\Thumb\\Models\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dealskoo\\Thumb\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hadi",
+            "email": "hadi@dealskoo.com",
+            "homepage": "https://www.dealskoo.com"
+        }
+    ],
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "require": {
+        "php": ">=7.1",
+        "laravel/framework": ">=7.20"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.23",
+        "orchestra/canvas": "^6.10",
+        "phpunit/phpunit": "^9.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dealskoo\\Thumb\\Providers\\ThumbServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

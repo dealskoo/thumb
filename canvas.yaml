@@ -1,0 +1,28 @@
+preset: package
+
+namespace: Dealskoo\Thumb
+user-auth-provider: App\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+  namespace: Database\Factories\Dealskoo\Thumb\Models
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: Dealskoo\Thumb\Console
+
+model:
+  namespace: Dealskoo\Thumb\Models
+
+provider:
+  namespace: Dealskoo\Thumb\Providers
+
+testing:
+  namespace: Dealskoo\Thumb\Tests
