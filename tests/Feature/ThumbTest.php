@@ -140,7 +140,6 @@ class ThumbTest extends TestCase
 
     public function test_thumbers()
     {
-        Event::fake();
         $user = User::create(['name' => 'user']);
         $user1 = User::create(['name' => 'user1']);
         $post = Post::create(['title' => 'test guide']);
@@ -148,6 +147,9 @@ class ThumbTest extends TestCase
         $this->assertTrue($user->hasThumbUp($post));
         $user1->thumbDown($post);
         $this->assertTrue($user1->hasThumbDown($post));
+        $this->assertCount(2, $post->thumbs);
+        $this->assertCount(1, $post->thumbsUp()->get());
+        $this->assertCount(1, $post->thumbsDown()->get());
         $this->assertCount(2, $post->thumbers);
     }
 }
