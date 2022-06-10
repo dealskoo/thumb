@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thumb extends Model
 {
+    protected $fillable = [
+        'up',
+        'down'
+    ];
+
     protected $dispatchesEvents = [
-        'saved' => Event::class
+        'updated' => Event::class
     ];
 
     public function thumbable()

@@ -13,16 +13,19 @@ trait Thumber
         $attributes = [
             'thumbable_type' => $model->getMorphClass(),
             'thumbable_id' => $model->getKey(),
-            'user_id' => $model->getKey()
+            'user_id' => $this->getKey()
         ];
-        return Thumb::query()->where($attributes)->firstOr(function () use ($attributes) {
-            return Thumb::unguard(function () use ($attributes) {
+        $thumb = Thumb::query()->where($attributes)->firstOr(function () use ($attributes) {
+            return Thumb::unguarded(function () use ($attributes) {
                 if ($this->relationLoaded('thumbs')) {
                     $this->unsetRelation('thumbs');
                 }
-                return Thumb::query()->create(Arr::collapse([$attributes, ['up' => 1, 'down' => 0]]));
+                return Thumb::query()->create($attributes);
             });
         });
+        $thumb->fill(['up' => 1, 'down' => 0]);
+        $thumb->save();
+        return $thumb;
     }
 
     public function thumbDown(Model $model)
@@ -30,16 +33,19 @@ trait Thumber
         $attributes = [
             'thumbable_type' => $model->getMorphClass(),
             'thumbable_id' => $model->getKey(),
-            'user_id' => $model->getKey()
+            'user_id' => $this->getKey()
         ];
-        return Thumb::query()->where($attributes)->firstOr(function () use ($attributes) {
-            return Thumb::unguard(function () use ($attributes) {
+        $thumb = Thumb::query()->where($attributes)->firstOr(function () use ($attributes) {
+            return Thumb::unguarded(function () use ($attributes) {
                 if ($this->relationLoaded('thumbs')) {
                     $this->unsetRelation('thumbs');
                 }
-                return Thumb::query()->create(Arr::collapse([$attributes, ['up' => 0, 'down' => 1]]));
+                return Thumb::query()->create($attributes);
             });
         });
+        $thumb->fill(['up' => 0, 'down' => 1]);
+        $thumb->save();
+        return $thumb;
     }
 
     public function toggleThumb(Model $model)
